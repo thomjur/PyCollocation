@@ -27,5 +27,4 @@ def start_collocation_analysis(collection, search_term, l_window, r_window):
 
     print(f"Full Word Count: {sum(full_counter.values())}\n\nLeft Words: {left_counter.most_common()}\n\nRight words: {right_counter.most_common()}\n")
 
-
-
+    return full_counter, left_counter, right_counter
