@@ -14,7 +14,7 @@ def test_collocations(test_sentences):
 def test_start_collocation_analysis(test_sentences):
     full_counter, left_counter, right_counter = start_collocation_analysis(test_sentences, "test", 3, 3)
     assert left_counter["dolor"] == 2, "Should be 2"
-    assert right_counter["dolor"] == 2, "Should be 2"
+    assert right_counter["dolor"] == 1, "Should be 1"
 
 # test collection of tweets
 test_sentences = ["Lorem ipsum dolor test sit amet, consectetuer adipiscing elit.", "Aenean commodo ligula dolor test eget dolor.", \

@@ -1,5 +1,6 @@
 import sys
 from collections import Counter
+from nltk.tokenize import TweetTokenizer, word_tokenize
 
 def main(sentence, word, l, r):
     '''
@@ -12,7 +13,7 @@ def main(sentence, word, l, r):
     # print for debugging
     print(f"Length: {length}\n\n\"{word}\" Count: {word_counter}\n\nLeft Words: {left_counter.most_common()}\n\nRight words: {right_counter.most_common()}\n")
 
-def collocation(document, word, l, r):
+def collocation(document, word, l, r, tokenizer="standard"):
 
     # counter dict of words left of search term
     left_counter = Counter()
@@ -25,7 +26,13 @@ def collocation(document, word, l, r):
     word = word.lower()
     document = document.lower()
 
-    # TODO: implement nltk tokenizer
+    # select tokenizer (word is default; otherwise "tweet")
+    if tokenizer == "standard":
+        word_list = word_tokenize(document)
+    elif tokenizer == "tweet":
+        tweet_tokenizer = TweetTokenizer()
+        word_list = tweet_tokenizer.tokenize(document)
+        
     word_list = document.split(" ")
     # words in document
     length = len(word_list)
