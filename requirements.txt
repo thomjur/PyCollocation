@@ -1,2 +1,3 @@
 ##### requirements for PyCollocation #####
 nltk
+pandas

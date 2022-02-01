@@ -31,11 +31,12 @@ def collocation(document, word, l, r, tokenizer="standard"):
     # select tokenizer (word is default; otherwise "tweet")
     if tokenizer == "standard":
         word_list = word_tokenize(document)
+        ## only keeping words TODO: this might lead to wrong results as it currently is, better using stop word list later on
+        word_list = [word for word in word_list if re.compile(r"\w+").match(word)]
     elif tokenizer == "tweet":
         tweet_tokenizer = TweetTokenizer()
         word_list = tweet_tokenizer.tokenize(document)
 
-    word_list = document.split(" ")
     # words in document
     length = len(word_list)
     # get word count of full document
