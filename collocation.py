@@ -11,9 +11,6 @@ def main(sentence, word, l, r):
     # start collocation analyses
     left_counter, right_counter, length, word_counter = collocation(sentence, word, l, r)
 
-    # print for debugging
-    print(f"Length: {length}\n\n\"{word}\" Count: {word_counter}\n\nLeft Words: {left_counter.most_common()}\n\nRight words: {right_counter.most_common()}\n")
-
 def collocation(document, word, l, r, tokenizer="standard"):
 
     # counter dict of words left of search term
