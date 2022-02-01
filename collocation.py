@@ -1,6 +1,7 @@
 import sys
 from collections import Counter
 from nltk.tokenize import TweetTokenizer, word_tokenize
+import re
 
 def main(sentence, word, l, r):
     '''
@@ -22,8 +23,9 @@ def collocation(document, word, l, r, tokenizer="standard"):
     # full counter - needed for later calculation (log-likelihood etc.)
     full_counter = Counter()
 
-    # setting word/document to lower case
-    word = word.lower()
+    # setting word to lower case and including regex
+    word = re.compile(word.lower())
+    # setting document to lower case
     document = document.lower()
 
     # select tokenizer (word is default; otherwise "tweet")
@@ -32,7 +34,7 @@ def collocation(document, word, l, r, tokenizer="standard"):
     elif tokenizer == "tweet":
         tweet_tokenizer = TweetTokenizer()
         word_list = tweet_tokenizer.tokenize(document)
-        
+
     word_list = document.split(" ")
     # words in document
     length = len(word_list)
@@ -44,7 +46,9 @@ def collocation(document, word, l, r, tokenizer="standard"):
 
     # main function to collect words left/right of search term
     for i in range(len(word_list)):
-        if word_list[i] == word:
+        # check if word matches the current token in the document taking into account regex
+        match = word.match(word_list[i])
+        if match:
             for x in range(1,int(l)+1):
                 if i-x >= 0:
                     left_counter.update([word_list[i-x]])
