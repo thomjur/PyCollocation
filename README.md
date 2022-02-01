@@ -6,5 +6,5 @@ Since we have implemented some tokenizer from `nltk.tokenize`, one needs to inst
 
 ```Python
 import nltk
-nltk.download('punct')
+nltk.download('punkt')
 ```
