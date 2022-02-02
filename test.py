@@ -49,7 +49,7 @@ class GeneralUnitTest(unittest.TestCase):
         this is currently no real test...
         '''
         full_counter, left_counter, right_counter = start_collocation_analysis(self.test_sentences, "Test", 3, 3)
-        display.output_top_collocates(left_counter, right_counter)
+        display.get_results_collocates(left_counter, right_counter, full_counter)
         self.assertTrue(True)
 
 if __name__ == "__main__":
