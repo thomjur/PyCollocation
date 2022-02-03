@@ -26,6 +26,7 @@ class GeneralUnitTest(unittest.TestCase):
         full_counter, left_counter, right_counter = collocation(self.test_sentences[0], "Test", 3, 3)
         self.assertEqual(right_counter["dolor"], 0)
         self.assertEqual(left_counter["dolor"], 1)
+        self.assertEqual(full_counter["elit"], 1)
 
     def test_start_collocation_analysis(self):
         '''
@@ -34,6 +35,7 @@ class GeneralUnitTest(unittest.TestCase):
         full_counter, left_counter, right_counter = start_collocation_analysis(self.test_sentences, "Test", 3, 3)
         self.assertEqual(left_counter["dolor"], 2)
         self.assertEqual(right_counter["dolor"], 2)
+        self.assertEqual(full_counter["nec"], 2)
 
     def test_regex(self):
         '''
