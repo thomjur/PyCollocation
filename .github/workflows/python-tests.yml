@@ -32,4 +32,4 @@ jobs:
         # Run the tests
       - name: Run tests
         run: |
-          python -m unittest -p 'tests.py'
+          python -m unittest 'tests.py'
