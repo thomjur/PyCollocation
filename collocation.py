@@ -57,6 +57,11 @@ def collocation(document, word, l, r, tokenizer="standard"):
 
     return full_counter, left_counter, right_counter
 
+    def quatsch:
+        hallo = 3
+
+
+
 if __name__ == "__main__":
     '''
         argvs: document (str), Searchterm (str), L-Window (int), R-Window (int)
