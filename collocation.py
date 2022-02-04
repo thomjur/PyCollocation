@@ -58,7 +58,7 @@ def collocation(document, word, l, r, tokenizer="standard"):
     return full_counter, left_counter, right_counter
 
     def quatsch:
-        hallo = 4
+        hallo = 5
 
 
 
