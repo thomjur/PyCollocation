@@ -1,6 +1,8 @@
 from collocation import collocation
 from collections import Counter
 from tools import display
+from pathlib import Path
+import sys
 import re
 
 def start_collocation_analysis(collection, search_term, l_window="3", r_window="3", statistic="freq", doc_type="iterable", output_type="print"):
@@ -25,8 +27,17 @@ def start_collocation_analysis(collection, search_term, l_window="3", r_window="
 
     # TODO: collect collocations depending on input data 
     if doc_type == "folder":
-        pass
-        raise("not yet implemented")
+        # in this case, the collection is a folder path
+        directory = collection
+        docs = Path(directory).glob("*")
+        for doc in docs:
+            with open(doc, "r") as f:
+                doc = f.read()
+                print(doc)
+                fc, lc, rc = collocation(doc, search_term, l_window, r_window)
+                left_counter += lc
+                right_counter += rc
+                full_counter += fc
     elif doc_type == "single":
         fc, lc, rc = collocation(collection, search_term, l_window, r_window)
         left_counter += lc
@@ -60,6 +71,7 @@ if __name__ == "__main__":
     l_window = sys.argv[3]
     r_window = sys.argv[4]
     statistic = sys.argv[5]
+    output_type = sys.argv[6]
 
     ## starting program
-    start_collocation_analysis(collection, search_term, l_window, r_window, statistic)
+    start_collocation_analysis(collection, search_term, int(l_window), int(r_window), statistic, doc_type="folder", output_type = output_type)
