@@ -3,16 +3,9 @@ from collections import Counter
 from nltk.tokenize import TweetTokenizer, word_tokenize
 import re
 
-def main(sentence, word, l, r):
-    '''
-        main function to start collocation analysis
-    '''
-
-    # start collocation analyses
-    left_counter, right_counter, length, word_counter = collocation(sentence, word, l, r)
-
 def collocation(document, word, l, r, tokenizer="standard"):
-
+    '''Main function for acquiring collocation data.
+    '''
     # counter dict of words left of search term
     left_counter = Counter()
     # counter dict of words right of search term
@@ -56,11 +49,3 @@ def collocation(document, word, l, r, tokenizer="standard"):
                     right_counter.update([word_list[i+x]])
 
     return full_counter, left_counter, right_counter
-
-
-
-if __name__ == "__main__":
-    '''
-        argvs: document (str), Searchterm (str), L-Window (int), R-Window (int)
-    '''
-    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])

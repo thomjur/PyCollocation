@@ -1,5 +1,4 @@
 from analysis import start_collocation_analysis
-from collocation import collocation
 from tools import display
 import unittest
 
@@ -23,14 +22,14 @@ class GeneralUnitTest(unittest.TestCase):
         '''
         Test for single sentence function
         '''
-        full_counter, left_counter, right_counter = collocation(self.test_sentences[0], "Test", 3, 3)
+        full_counter, left_counter, right_counter = start_collocation_analysis(self.test_sentences[0], "Test", 3, 3, doc_type="single")
         self.assertEqual(right_counter["dolor"], 0)
         self.assertEqual(left_counter["dolor"], 1)
         self.assertEqual(full_counter["elit"], 1)
 
     def test_start_collocation_analysis(self):
         '''
-        Test for array of sentences function
+        Test for array of sentences function fpr MULTIPLE documents
         '''
         full_counter, left_counter, right_counter = start_collocation_analysis(self.test_sentences, "Test", 3, 3)
         self.assertEqual(left_counter["dolor"], 2)
@@ -39,9 +38,9 @@ class GeneralUnitTest(unittest.TestCase):
 
     def test_regex(self):
         '''
-        Test for regex in search term
+        Test for regex in search term for SINGLE document
         '''
-        full_counter, left_counter, right_counter = collocation(self.test_sentences[0], "Tes*", 3, 3)
+        full_counter, left_counter, right_counter = start_collocation_analysis(self.test_sentences[0], "Tes*", 3, 3, doc_type="single")
         self.assertEqual(right_counter["dolor"], 0)
         self.assertEqual(left_counter["dolor"], 1)
 
@@ -51,7 +50,7 @@ class GeneralUnitTest(unittest.TestCase):
         this is currently no real test...
         '''
         full_counter, left_counter, right_counter = start_collocation_analysis(self.test_sentences, "Test", 3, 3)
-        display.get_results_collocates(left_counter, right_counter, full_counter, 5, 3, 3, "mu")
+        display.get_results_collocates(left_counter, right_counter, full_counter, 5, 3, 3, "mu", "print")
         self.assertTrue(True)
 
 if __name__ == "__main__":
