@@ -1,10 +1,11 @@
 import pandas as pd
+from tools.statistics import *
 
 '''
 collection of functions to properly display output from analyses
 '''
 
-def get_results_collocates(left_counter, right_counter, total_word_count, k=3):
+def get_results_collocates(left_counter, right_counter, total_word_counter, search_term_counter, l_window, r_window, statistic, k=3):
     '''Function to return top collocates.
 
     PARAMETERS
@@ -24,10 +25,17 @@ def get_results_collocates(left_counter, right_counter, total_word_count, k=3):
     df_top_collocates["orient"] = df_top_collocates.apply(lambda x: get_orientation_(left_counter, right_counter, x["collocate"]), axis=1)
 
     # add total appearance of collocate
-    df_top_collocates["freq"] = df_top_collocates.apply(lambda x: total_word_count[x["collocate"]], axis=1)
+    df_top_collocates["freq"] = df_top_collocates.apply(lambda x: total_word_counter[x["collocate"]], axis=1)
     
+    # calculate selected statistic (if different than "freq")
+    if statistic == "mu":
+        df_top_collocates["statistic"] = df_top_collocates.apply(lambda x: MU(search_term_counter, x["freq"], x["coll_freq"], sum(total_word_counter.values()), l_window, r_window), axis=1)
+
     ### output
-    print(df_top_collocates.sort_values("freq", ascending=False).reset_index().drop("index", axis=1))
+    if statistic != "freq":
+        print(df_top_collocates.sort_values("statistic", ascending=False).reset_index().drop("index", axis=1))
+    else:
+        print(df_top_collocates.sort_values("freq", ascending=False).reset_index().drop("index", axis=1))
 
 
 ### helper functions
