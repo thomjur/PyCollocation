@@ -44,6 +44,14 @@ class GeneralUnitTest(unittest.TestCase):
         self.assertEqual(right_counter["dolor"], 0)
         self.assertEqual(left_counter["dolor"], 1)
 
+    # DOES NOT WORK YET    
+    # def test_get_results_collocates(self):
+    #     '''
+    #     Test if get_results_collocates in display.py is executed without an error
+    #     '''
+    #     self.assertTrue(get_results_collocates(left_counter, right_counter, total_word_counter, search_term_counter, l_window, r_window, statistic, output_type, k=3))
+
+
     def test_tabular_output(self):
         '''
         test pretty print output
