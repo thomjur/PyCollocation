@@ -35,7 +35,7 @@ def twitter_collocates(directory, search_term, l_window="5", r_window="5", stati
     search_term_count = 0
 
     if api == "1":
-        for entry in glob(f"{directory}/*.jsonl.gz", recursive = True):
+        for entry in glob(f"{directory}/**/*.jsonl.gz", recursive = True):
             with gzip.open(entry, "rb") as jsonlentry:
                 reader = jsonlines.Reader(jsonlentry)
                 for obj in reader:
