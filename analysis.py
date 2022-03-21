@@ -18,6 +18,8 @@ def start_collocation_analysis(collection, search_term, l_window="3", r_window="
         - output_type = "print" | "csv"
     '''
 
+    print(output_type)
+
     # counter dict of words left of search term
     left_counter = Counter()
     # counter dict of words right of search term
@@ -71,7 +73,8 @@ if __name__ == "__main__":
     l_window = sys.argv[3]
     r_window = sys.argv[4]
     statistic = sys.argv[5]
-    output_type = sys.argv[6]
+    doc_type = sys.argv[6]
+    output_type = sys.argv[7]
 
     ## starting program
-    start_collocation_analysis(collection, search_term, int(l_window), int(r_window), statistic, doc_type="folder", output_type = output_type)
+    start_collocation_analysis(collection, search_term, int(l_window), int(r_window), statistic, doc_type=doc_type, output_type = output_type)

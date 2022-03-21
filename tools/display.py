@@ -26,7 +26,6 @@ def get_results_collocates(left_counter, right_counter, total_word_counter, sear
 
     # add total appearance of collocate
     df_top_collocates["freq"] = df_top_collocates.apply(lambda x: total_word_counter[x["collocate"]], axis=1)
-
     # calculate selected statistic (if different than "freq") and output
     if statistic == "mu":
         # calculate MU association measure
