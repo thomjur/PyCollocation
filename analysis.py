@@ -2,6 +2,7 @@ from collocation import collocation
 from collections import Counter
 from tools import display
 from pathlib import Path
+from tools.exceptions import NoResultsException
 import sys
 import re
 
@@ -17,8 +18,6 @@ def start_collocation_analysis(collection, search_term, l_window="3", r_window="
         - doc_type = "iterable" | "folder" | "single"
         - output_type = "print" | "csv"
     '''
-
-    print(output_type)
 
     # counter dict of words left of search term
     left_counter = Counter()
@@ -60,7 +59,12 @@ def start_collocation_analysis(collection, search_term, l_window="3", r_window="
             search_term_count += full_counter[elem]
 
     # display results
-    display.get_results_collocates(left_counter, right_counter, full_counter, search_term_count, l_window, r_window, statistic, output_type)
+
+    if search_term_count == 0:
+        # error handling
+        raise NoResultsException("Sorry, search term was not found or no documents were provided!")
+    else:
+        display.get_results_collocates(left_counter, right_counter, full_counter, search_term_count, l_window, r_window, statistic, output_type)
 
     return full_counter, left_counter, right_counter
 

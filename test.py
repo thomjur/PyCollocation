@@ -1,5 +1,6 @@
 from analysis import start_collocation_analysis
 from tools import display
+from tools.exceptions import NoResultsException
 import unittest
 
 '''
@@ -26,6 +27,20 @@ class GeneralUnitTest(unittest.TestCase):
         self.assertEqual(right_counter["dolor"], 0)
         self.assertEqual(left_counter["dolor"], 1)
         self.assertEqual(full_counter["elit"], 1)
+    
+    def test_not_existing_search_term(self):
+        '''
+        Test if exception raised if search term not found in docs.
+        '''
+        with self.assertRaises(NoResultsException):
+            start_collocation_analysis(self.test_sentences[0], "muhkuh", 3, 3, doc_type="single")
+
+    def test_not_existing_folder(self):
+        '''
+        Test if exception raised if fodler/doc not found.
+        '''
+        with self.assertRaises(NoResultsException):
+            start_collocation_analysis("corrralia", "test", 3, 3, doc_type="folder")
 
     def test_start_collocation_analysis(self):
         '''
